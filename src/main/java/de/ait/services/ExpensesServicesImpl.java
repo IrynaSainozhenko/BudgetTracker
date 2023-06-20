@@ -4,6 +4,8 @@ import de.ait.models.Category;
 import de.ait.models.Expense;
 import de.ait.repositories.ExpensesRepository;
 
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +16,7 @@ public class ExpensesServicesImpl implements ExpensesServices{
         this.expensesRepository = expensesRepository;
     }
 
-    public List<Expense> getAll() {
+    public List<Expense> getAll() throws IOException, ParseException {
 
         return expensesRepository.getAllExpenses();
     }
@@ -22,7 +24,7 @@ public class ExpensesServicesImpl implements ExpensesServices{
     @Override
     public void addNewExpense(String title, Category category, double sumExpenses, Date date) {
         Expense newExpense = new Expense(title, category, sumExpenses, date);
-
+        expensesRepository.save(newExpense);
     }
     public void changeExpenseAmount(String expenseId, double newAmount) {
         Expense expense = expensesRepository.getExpenseById(expenseId);
@@ -34,4 +36,5 @@ public class ExpensesServicesImpl implements ExpensesServices{
             System.out.println("Расход с указанным идентификатором не найден");
         }
     }
+
 }

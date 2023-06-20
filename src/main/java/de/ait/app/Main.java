@@ -1,12 +1,14 @@
 package de.ait.app;
 
 import de.ait.models.Category;
+import de.ait.models.Expense;
 import de.ait.repositories.ExpensesRepository;
 import de.ait.repositories.ExpensesRepositoryText;
 import de.ait.services.ExpensesServices;
 import de.ait.services.ExpensesServicesImpl;
 
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -15,7 +17,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) throws ParseException, IOException {
         Scanner scanner = new Scanner(System.in);
         ExpensesRepository expensesRepository = new ExpensesRepositoryText("expenses.txt");
         ExpensesServicesImpl expensesServices = new ExpensesServicesImpl(expensesRepository);
@@ -24,7 +26,7 @@ public class Main {
             System.out.println("1. Добавить расход");
             System.out.println("2. Изменить расход");
             System.out.println("3. ");
-            System.out.println("4. ");
+            System.out.println("4. Вывести все расходы");
             System.out.println("0. Выход");
 
             int command = 0;
@@ -52,7 +54,7 @@ public class Main {
                         System.out.println("Введите сумму расхода:");
                         double sumExpenses = Double.parseDouble(scanner.nextLine());
                         System.out.println("Введите дату расхода");
-                        Date date = new SimpleDateFormat("dd.MM.yyyy").parse(scanner.nextLine());                                ;
+                        Date date = new SimpleDateFormat("dd.MM.yyyy").parse(scanner.nextLine());
                         expensesServices.addNewExpense(title, category, sumExpenses, date);
                         System.out.println("Расход успешно добавлен!");
                         break;
@@ -66,6 +68,11 @@ public class Main {
                         expensesServices.changeExpenseAmount(expenseId, newAmount);
                         break;
 
+                    case 4:
+                        System.out.println("Все расходы за весь период: ");
+                        List<Expense> expenses = expensesServices.getAll();
+                        printExpensesList(expenses);
+                        break;
 
 
                     case 0:
@@ -79,6 +86,15 @@ public class Main {
                 System.out.println("Перезапустите программу!");
                 return;
             }
+        }
+    }
+
+    public static void printExpensesList(List<Expense> expensesList){
+        for(Expense expenses : expensesList){
+            System.out.println("Наименование: " + expenses.getTitle()
+                    + "; сумма: " + expenses.getSumExpenses()
+                    + "; дата: " + expenses.getDate()
+                    + "; категория: " + expenses.getCategory());
         }
     }
 }

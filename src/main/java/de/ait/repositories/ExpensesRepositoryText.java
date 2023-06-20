@@ -39,9 +39,9 @@ public class ExpensesRepositoryText implements ExpensesRepository{
     private static Expense parseLine(String line) throws ParseException {
         String[] parsed = line.split("\\|");
         String title = parsed[0];
-        double sumExpenses = Double.parseDouble(parsed[1]);
-        Date date = new SimpleDateFormat("dd.MM.yyyy").parse(parsed[2]);
-        Category category = Category.valueOf(parsed[3]);
+        Category category = Category.valueOf(parsed[1]);
+        double sumExpenses = Double.parseDouble(parsed[2]);
+        Date date = new SimpleDateFormat("dd.MM.yyyy").parse(parsed[3]);
 
         return new Expense(title,category, sumExpenses, date);
     }

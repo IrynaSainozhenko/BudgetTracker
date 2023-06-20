@@ -66,4 +66,14 @@ public class ExpensesRepositoryText implements ExpensesRepository{
 
 
     }
+
+    @Override
+    public Expense getExpenseById(String expenseId) {
+        return null;
+    }
+
+    @Override
+    public void updateExpense(Expense expense) {
+
+    }
 }

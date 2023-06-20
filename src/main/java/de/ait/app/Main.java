@@ -18,7 +18,7 @@ public class Main {
     public static void main(String[] args) throws ParseException {
         Scanner scanner = new Scanner(System.in);
         ExpensesRepository expensesRepository = new ExpensesRepositoryText("expenses.txt");
-        ExpensesServices expensesServices = new ExpensesServicesImpl(expensesRepository);
+        ExpensesServicesImpl expensesServices = new ExpensesServicesImpl(expensesRepository);
 
         while (true) {
             System.out.println("1. Добавить расход");
@@ -55,6 +55,15 @@ public class Main {
                         Date date = new SimpleDateFormat("dd.MM.yyyy").parse(scanner.nextLine());                                ;
                         expensesServices.addNewExpense(title, category, sumExpenses, date);
                         System.out.println("Расход успешно добавлен!");
+                        break;
+
+                    case 2:
+                        System.out.println("2. Изменить расход");
+                        System.out.println("Введите идентификатор расхода:");
+                        String expenseId = scanner.nextLine();
+                        System.out.println("Введите новую сумму расхода:");
+                        double newAmount = Double.parseDouble(scanner.nextLine());
+                        expensesServices.changeExpenseAmount(expenseId, newAmount);
                         break;
 
 

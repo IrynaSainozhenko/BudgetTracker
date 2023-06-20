@@ -41,5 +41,8 @@ public class Expense {
                 ", date=" + date +
                 '}';
     }
+
+    public void setAmount(double newAmount) {
+    }
 }
 

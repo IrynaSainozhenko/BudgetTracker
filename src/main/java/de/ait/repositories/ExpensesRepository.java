@@ -7,4 +7,8 @@ import java.util.List;
 public interface ExpensesRepository {
     List<Expense> getAllExpenses();
     void save(Expense expense);
+
+    Expense getExpenseById(String expenseId);
+
+    void updateExpense(Expense expense);
 }

@@ -74,4 +74,30 @@ public class ExpensesRepositoryText implements ExpensesRepository{
     public void updateExpense(Expense expense) {
 
     }
+
+    @Override
+    public void removeExpense(String expenseToRemove) {
+        List<Expense> expenses = new ArrayList<>();
+        try {
+            File expensesExistFile = new File("expenses.txt");
+            File expensesTempFile = new File("expensesTemp.txt");
+            BufferedReader reader = new BufferedReader(new FileReader(expensesExistFile));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(expensesTempFile));
+
+            expenseToRemove = reader.readLine();
+
+            while ((expenseToRemove !=null)) {
+                for (Expense expense:expenses){
+                    if (!expenseToRemove.equals(expense.getTitle())) {
+                        writer.write(expenseToRemove);
+                    }
+                }
+            }
+            System.out.println("Расход успешно удален");
+            expensesExistFile.delete();
+            expensesTempFile.renameTo(expensesExistFile);
+        } catch (IOException e) {
+            System.out.println("Произошла ошибка");
+        }
+    }
 }

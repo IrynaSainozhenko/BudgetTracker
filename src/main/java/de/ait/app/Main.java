@@ -25,7 +25,7 @@ public class Main {
         while (true) {
             System.out.println("1. Добавить расход");
             System.out.println("2. Изменить расход");
-            System.out.println("3. ");
+            System.out.println("3. Удалить расход");
             System.out.println("4. Вывести все расходы");
             System.out.println("0. Выход");
 
@@ -66,6 +66,13 @@ public class Main {
                         System.out.println("Введите новую сумму расхода:");
                         double newAmount = Double.parseDouble(scanner.nextLine());
                         expensesServices.changeExpenseAmount(expenseId, newAmount);
+                        break;
+
+                    case 3:
+                        System.out.println("3. Удалить расход");
+                        System.out.println("Введите название расхода:");
+                        String expenseName = scanner.nextLine();
+                        expensesRepository.removeExpense(expenseName);
                         break;
 
                     case 4:

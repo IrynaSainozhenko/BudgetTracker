@@ -26,14 +26,14 @@ public class ExpensesServicesImpl implements ExpensesServices{
         Expense newExpense = new Expense(title, category, sumExpenses, date);
         expensesRepository.save(newExpense);
     }
-    public void changeExpenseAmount(String expenseId, double newAmount) {
-        Expense expense = expensesRepository.getExpenseById(expenseId);
+    public void changeExpenseAmount(String title, double newAmount) {
+        Expense expense = expensesRepository.getExpenseById(title);
         if (expense != null) {
             expense.setAmount(newAmount);
             expensesRepository.updateExpense(expense);
             System.out.println("Сумма расхода успешно изменена");
         } else {
-            System.out.println("Расход с указанным идентификатором не найден");
+            System.out.println("Расход с указанным названием не найден");
         }
     }
 

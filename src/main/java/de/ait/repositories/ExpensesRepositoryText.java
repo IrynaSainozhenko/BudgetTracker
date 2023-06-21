@@ -63,12 +63,10 @@ public class ExpensesRepositoryText implements ExpensesRepository{
             System.out.println("Произошла ошибка");
         }
 
-
-
     }
 
     @Override
-    public Expense getExpenseById(String expenseId) {
+    public Expense getExpenseById(String title) {
         return null;
     }
 

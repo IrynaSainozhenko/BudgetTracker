@@ -11,7 +11,7 @@ public interface ExpensesRepository {
     List<Expense> getAllExpenses() throws IOException, ParseException;
     void save(Expense expense);
 
-    Expense getExpenseById(String expenseId);
+    Expense getExpenseById(String title);
 
     void updateExpense(Expense expense);
 }

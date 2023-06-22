@@ -4,13 +4,17 @@ import de.ait.models.Category;
 import de.ait.models.Expense;
 
 import java.io.*;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ExpensesRepositoryText implements ExpensesRepository{
+public class ExpensesRepositoryText implements ExpensesRepository {
     private String fileName;
 
     public ExpensesRepositoryText(String fileName) {
@@ -43,14 +47,14 @@ public class ExpensesRepositoryText implements ExpensesRepository{
         double sumExpenses = Double.parseDouble(parsed[2]);
         Date date = new SimpleDateFormat("dd.MM.yyyy").parse(parsed[3]);
 
-        return new Expense(title,category, sumExpenses, date);
+        return new Expense(title, category, sumExpenses, date);
     }
 
 
     @Override
     public void save(Expense expense) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(
-                new FileWriter(fileName, true))){
+                new FileWriter(fileName, true))) {
 
             String newExpense = expense.getTitle() + "|" +
                     expense.getCategory() + "|" +
@@ -59,7 +63,7 @@ public class ExpensesRepositoryText implements ExpensesRepository{
             bufferedWriter.write(newExpense);
             bufferedWriter.newLine();
 
-        }catch(IOException e){
+        } catch (IOException e) {
             throw new IllegalStateException("Данные не могут быть сохранены");
 
         }
@@ -78,27 +82,37 @@ public class ExpensesRepositoryText implements ExpensesRepository{
 
     @Override
     public void removeExpense(String expenseToRemove) {
-        List<Expense> expenses = new ArrayList<>();
         try {
-            File expensesExistFile = new File("expenses.txt");
-            File expensesTempFile = new File("expensesTemp.txt");
-            BufferedReader reader = new BufferedReader(new FileReader(expensesExistFile));
-            BufferedWriter writer = new BufferedWriter(new FileWriter(expensesTempFile));
-
-            expenseToRemove = reader.readLine();
-
-            while ((expenseToRemove !=null)) {
-                for (Expense expense:expenses){
-                    if (!expenseToRemove.equals(expense.getTitle())) {
-                        writer.write(expenseToRemove);
-                    }
+            BufferedReader reader = new BufferedReader(new FileReader(fileName));
+            List<Expense> expenses = new ArrayList<>();
+            String line = reader.readLine();
+            while ((line != null)) {
+                Expense expense = parseLine(line);
+                expenses.add(expense);
+                line = reader.readLine();
+            }
+            for (int i = 0; i<expenses.size();i++){
+                if (expenses.get(i).getTitle().equals(expenseToRemove)) {
+                    expenses.remove(i);
                 }
             }
-            System.out.println("Расход успешно удален");
-            expensesExistFile.delete();
-            expensesTempFile.renameTo(expensesExistFile);
-        } catch (IOException e) {
-            System.out.println("Произошла ошибка");
+            reader.close();
+            try {
+                BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+                for (Expense expense:expenses){
+                    writer.write(expense.getTitle() + "|" +
+                            expense.getCategory() + "|" +
+                            expense.getSumExpenses() + "|" +
+                            (new SimpleDateFormat("dd.MM.yyyy").format(expense.getDate())));
+                    writer.newLine();
+                }
+                writer.close();
+            }catch (Exception e){
+                System.err.println("Ошибка записи файла");
+            }
+        System.out.println("Расход успешно удален");
+        } catch (Exception e) {
+            System.out.println("Произошла ошибка работы с файлом");
         }
     }
 }

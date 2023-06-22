@@ -60,7 +60,8 @@ public class ExpensesRepositoryText implements ExpensesRepository{
             bufferedWriter.newLine();
 
         }catch(IOException e){
-            System.out.println("Произошла ошибка");
+            throw new IllegalStateException("Данные не могут быть сохранены");
+
         }
 
     }

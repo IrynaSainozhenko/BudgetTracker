@@ -26,6 +26,7 @@ public class ExpensesServicesImpl implements ExpensesServices{
         Expense newExpense = new Expense(title, category, sumExpenses, date);
         expensesRepository.save(newExpense);
     }
+
     public void changeExpenseAmount(String title, double newAmount) {
         Expense expense = expensesRepository.getExpenseById(title);
         if (expense != null) {

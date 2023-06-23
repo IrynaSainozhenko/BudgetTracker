@@ -28,17 +28,7 @@ public class ExpensesServicesImpl implements ExpensesServices{
         expensesRepository.save(newExpense);
     }
 
-    public void changeExpenseAmount(String title, double newAmount) {
-        Expense expense = expensesRepository.getExpenseById(title);
-        if (expense != null) {
-            expense.setAmount(newAmount);
-            expensesRepository.updateExpense(expense);
-            System.out.println("Сумма расхода успешно изменена");
-        } else {
-            System.out.println("Расход с указанным названием не найден");
-        }
-    }
-    public void changeExpenses(String expenseTitle, double newAmount){
+    public void updateExpense(String expenseTitle, double newAmount){
         expensesRepository.changeExpense(expenseTitle, newAmount);
     }
 

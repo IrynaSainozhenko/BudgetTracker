@@ -62,11 +62,11 @@ public class Main {
 
                     case 2:
                         System.out.println("2. Изменить расход");
-                        System.out.println("Введите идентификатор расхода:");
+                        System.out.println("Введите название расхода:");
                         String expenseTitle = scanner.nextLine();
                         System.out.println("Введите новую сумму расхода:");
                         double newAmount = Double.parseDouble(scanner.nextLine());
-                        expensesServices.changeExpenses(expenseTitle, newAmount);
+                        expensesServices.updateExpense(expenseTitle, newAmount);
                         break;
 
                     case 3:

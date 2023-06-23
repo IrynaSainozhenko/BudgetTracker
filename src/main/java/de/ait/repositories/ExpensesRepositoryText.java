@@ -72,16 +72,6 @@ public class ExpensesRepositoryText implements ExpensesRepository {
     }
 
     @Override
-    public Expense getExpenseById(String title) {
-        return null;
-    }
-
-    @Override
-    public void updateExpense(Expense expense) {
-
-    }
-
-    @Override
     public void removeExpense(String expenseToRemove) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
@@ -117,7 +107,6 @@ public class ExpensesRepositoryText implements ExpensesRepository {
     }
     @Override
     public void changeExpense(String expenseTitle, double newAmount) {
-        System.out.println(newAmount);
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
             List<Expense> expenses = new ArrayList<>();
@@ -145,7 +134,7 @@ public class ExpensesRepositoryText implements ExpensesRepository {
             }catch (Exception e){
                 System.err.println("Ошибка записи файла");
             }
-            System.out.println("Расход успешно удален");
+            System.out.println("Cумма расхода успешно изменена");
         } catch (Exception e) {
             System.out.println("Произошла ошибка работы с файлом");
         }

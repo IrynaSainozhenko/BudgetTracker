@@ -4,6 +4,7 @@ public enum Category {
     FOOD,
     CLOTHES,
     UTILITY_PAYMENTS,
+    HEALTH,
     ENTERTAINMENT,
     AUTO;
 

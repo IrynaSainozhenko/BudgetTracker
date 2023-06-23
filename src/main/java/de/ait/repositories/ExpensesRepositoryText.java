@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -45,7 +46,7 @@ public class ExpensesRepositoryText implements ExpensesRepository {
         String title = parsed[0];
         Category category = Category.valueOf(parsed[1]);
         double sumExpenses = Double.parseDouble(parsed[2]);
-        Date date = new SimpleDateFormat("dd.MM.yyyy").parse(parsed[3]);
+        LocalDate date = LocalDate.parse(parsed[3]);
 
         return new Expense(title, category, sumExpenses, date);
     }

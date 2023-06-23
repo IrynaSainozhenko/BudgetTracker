@@ -7,30 +7,7 @@ public class Expense {
     private String title;
     private Category category;
     private double sumExpenses;
-    private Date date;
-
-    public Expense(String title, Category category, double sumExpenses, Date date) {
-        this.title = title;
-        this.category = category;
-        this.sumExpenses = sumExpenses;
-        this.date = date;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public double getSumExpenses() {
-        return sumExpenses;
-    }
-
-    public Date getDate() {
-        return date;
-    }
+    private LocalDate date;
 
     @Override
     public String toString() {
@@ -40,6 +17,45 @@ public class Expense {
                 ", sumExpenses=" + sumExpenses +
                 ", date=" + date +
                 '}';
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public double getSumExpenses() {
+        return sumExpenses;
+    }
+
+    public void setSumExpenses(double sumExpenses) {
+        this.sumExpenses = sumExpenses;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public Expense(String title, Category category, double sumExpenses, LocalDate date) {
+        this.title = title;
+        this.category = category;
+        this.sumExpenses = sumExpenses;
+        this.date = date;
     }
 
     public void setAmount(double newAmount) {

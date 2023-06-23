@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -54,7 +55,7 @@ public class Main {
                         System.out.println("Введите сумму расхода:");
                         double sumExpenses = Double.parseDouble(scanner.nextLine());
                         System.out.println("Введите дату расхода");
-                        Date date = new SimpleDateFormat("dd.MM.yyyy").parse(scanner.nextLine());
+                        LocalDate date = LocalDate.parse(scanner.nextLine());
                         expensesServices.addNewExpense(title, category, sumExpenses, date);
                         System.out.println("Расход успешно добавлен!");
                         break;

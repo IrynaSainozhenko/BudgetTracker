@@ -6,11 +6,12 @@ import de.ait.repositories.ExpensesRepository;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
 public class ExpensesServicesImpl implements ExpensesServices{
-    private ExpensesRepository expensesRepository;
+    private final ExpensesRepository expensesRepository;
 
     public ExpensesServicesImpl(ExpensesRepository expensesRepository) {
         this.expensesRepository = expensesRepository;
@@ -22,7 +23,7 @@ public class ExpensesServicesImpl implements ExpensesServices{
     }
 
     @Override
-    public void addNewExpense(String title, Category category, double sumExpenses, Date date) {
+    public void addNewExpense(String title, Category category, double sumExpenses, LocalDate date) {
         Expense newExpense = new Expense(title, category, sumExpenses, date);
         expensesRepository.save(newExpense);
     }

@@ -16,5 +16,6 @@ public interface ExpensesServices {
     void updateExpense(String expenseTitle, double newAmount);
 
     void removeExpenses(String expenseToRemove);
+    void removeAllExpenses();
 
 }

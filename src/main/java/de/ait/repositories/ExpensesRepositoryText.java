@@ -139,4 +139,15 @@ public class ExpensesRepositoryText implements ExpensesRepository {
             System.out.println("Произошла ошибка работы с файлом");
         }
     }
+
+    @Override
+    public void removeAllExpenses() {
+        try{
+            PrintWriter printWriter = new PrintWriter(fileName);
+            printWriter.close();
+            System.out.println("Все расходы успешно удалены");
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 }

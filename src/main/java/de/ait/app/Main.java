@@ -71,9 +71,24 @@ public class Main {
 
                     case 3:
                         System.out.println("3. Удалить расход");
-                        System.out.println("Введите название расхода:");
-                        String expenseName = scanner.nextLine();
-                        expensesServices.removeExpenses(expenseName);
+                        System.out.println("Выберите вариант удаления:");
+                        System.out.println("1. Удалить один расход");
+                        System.out.println("2. Удалить всe расходы");
+                        int command1 = 0;
+                        if(scanner.hasNextInt()){
+                            command1 = scanner.nextInt();
+                            scanner.nextLine();
+                            switch (command1) {
+                                case 1:
+                                    System.out.println("Введите название расхода:");
+                                    String expenseName = scanner.nextLine();
+                                    expensesServices.removeExpenses(expenseName);
+                                    break;
+                                case 2:
+                                    expensesServices.removeAllExpenses();
+                                    break;
+                            }
+                        }
                         break;
 
                     case 4:

@@ -35,4 +35,9 @@ public class ExpensesServicesImpl implements ExpensesServices{
     public void removeExpenses(String expenseToRemove){
         expensesRepository.removeExpense(expenseToRemove);
     }
+
+    @Override
+    public void removeAllExpenses() {
+        expensesRepository.removeAllExpenses();
+    }
 }

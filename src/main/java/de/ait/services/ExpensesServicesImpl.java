@@ -38,5 +38,8 @@ public class ExpensesServicesImpl implements ExpensesServices{
             System.out.println("Расход с указанным названием не найден");
         }
     }
+    public void changeExpenses(String expenseTitle, double newAmount){
+        expensesRepository.changeExpense(expenseTitle, newAmount);
+    }
 
 }

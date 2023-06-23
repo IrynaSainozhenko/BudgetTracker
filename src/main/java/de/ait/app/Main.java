@@ -63,10 +63,10 @@ public class Main {
                     case 2:
                         System.out.println("2. Изменить расход");
                         System.out.println("Введите идентификатор расхода:");
-                        String expenseId = scanner.nextLine();
+                        String expenseTitle = scanner.nextLine();
                         System.out.println("Введите новую сумму расхода:");
                         double newAmount = Double.parseDouble(scanner.nextLine());
-                        expensesServices.changeExpenseAmount(expenseId, newAmount);
+                        expensesServices.changeExpenses(expenseTitle, newAmount);
                         break;
 
                     case 3:

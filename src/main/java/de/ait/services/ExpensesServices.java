@@ -13,5 +13,7 @@ public interface ExpensesServices {
     List<Expense> getAll() throws IOException, ParseException;
     void addNewExpense(String title, Category category, double sumExpenses, LocalDate date);
 
+    void changeExpenses(String expenseTitle, double newAmount);
+
 
 }

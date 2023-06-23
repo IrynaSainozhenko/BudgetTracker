@@ -115,4 +115,39 @@ public class ExpensesRepositoryText implements ExpensesRepository {
             System.out.println("Произошла ошибка работы с файлом");
         }
     }
+    @Override
+    public void changeExpense(String expenseTitle, double newAmount) {
+        System.out.println(newAmount);
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(fileName));
+            List<Expense> expenses = new ArrayList<>();
+            String line = reader.readLine();
+            while ((line != null)) {
+                Expense expense = parseLine(line);
+                expenses.add(expense);
+                line = reader.readLine();
+            }
+            for (int i = 0; i<expenses.size();i++){
+                if (expenses.get(i).getTitle().equals(expenseTitle)) {
+                    expenses.get(i).setSumExpenses(newAmount);
+                }
+            }
+            reader.close();
+            try {
+                BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+                for (Expense expense:expenses){
+                    writer.write(expense.getTitle() + "|" +
+                            expense.getCategory() + "|" +
+                            expense.getSumExpenses() + "|" + expense.getDate());
+                    writer.newLine();
+                }
+                writer.close();
+            }catch (Exception e){
+                System.err.println("Ошибка записи файла");
+            }
+            System.out.println("Расход успешно удален");
+        } catch (Exception e) {
+            System.out.println("Произошла ошибка работы с файлом");
+        }
+    }
 }

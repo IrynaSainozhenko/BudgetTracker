@@ -16,4 +16,6 @@ public interface ExpensesRepository {
     void updateExpense(Expense expense);
 
     void removeExpense(String expenseToRemove);
+
+    void changeExpense(String expenseTitle, double newAmount);
 }

@@ -73,8 +73,7 @@ public class Main {
                         System.out.println("3. Удалить расход");
                         System.out.println("Введите название расхода:");
                         String expenseName = scanner.nextLine();
-                        expensesRepository.removeExpense(expenseName);
-
+                        expensesServices.removeExpenses(expenseName);
                         break;
 
                     case 4:

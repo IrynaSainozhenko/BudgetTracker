@@ -42,4 +42,7 @@ public class ExpensesServicesImpl implements ExpensesServices{
         expensesRepository.changeExpense(expenseTitle, newAmount);
     }
 
+    public void removeExpenses(String expenseToRemove){
+        expensesRepository.removeExpense(expenseToRemove);
+    }
 }

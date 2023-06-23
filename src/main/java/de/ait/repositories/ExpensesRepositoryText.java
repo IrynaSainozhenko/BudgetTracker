@@ -103,8 +103,7 @@ public class ExpensesRepositoryText implements ExpensesRepository {
                 for (Expense expense:expenses){
                     writer.write(expense.getTitle() + "|" +
                             expense.getCategory() + "|" +
-                            expense.getSumExpenses() + "|" +
-                            (new SimpleDateFormat("dd.MM.yyyy").format(expense.getDate())));
+                            expense.getSumExpenses() + "|" + expense.getDate());
                     writer.newLine();
                 }
                 writer.close();

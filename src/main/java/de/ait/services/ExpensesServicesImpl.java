@@ -63,7 +63,7 @@ public class ExpensesServicesImpl implements ExpensesServices{
         if (expense == null) {
             throw new IllegalArgumentException("Расход с таким именем не найден");
         }
-
+        System.out.println(newTitle);
         expense.setTitle(newTitle);
         expensesRepository.changeExpense(expense);
     }

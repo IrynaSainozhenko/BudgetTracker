@@ -15,7 +15,8 @@ public class ExpenseListImpl implements ExpensesRepository{
             new Expense("Кофе", Category.FOOD,6.5, LocalDate.of(2023,5,18)),
             new Expense("Чай", Category.FOOD,3, LocalDate.of(2023,3,11)),
             new Expense("Джинсы", Category.CLOTHES,35, LocalDate.of(2023,2,16)),
-            new Expense("Футболка", Category.CLOTHES,15, LocalDate.of(2023,1,8))
+            new Expense("Футболка", Category.CLOTHES,15, LocalDate.of(2023,1,8)),
+            new Expense("Кепка", Category.CLOTHES,15, LocalDate.of(2023,6,25))
     ));
 
     @Override

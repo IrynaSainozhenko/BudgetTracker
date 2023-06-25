@@ -10,10 +10,8 @@ import de.ait.services.ExpensesServicesImpl;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -54,8 +52,13 @@ public class Main {
 
                         System.out.println("Введите сумму расхода:");
                         double sumExpenses = Double.parseDouble(scanner.nextLine());
-                        System.out.println("Введите дату расхода");
-                        LocalDate date = LocalDate.parse(scanner.nextLine());
+                        System.out.println("Введите дату расхода в формате yyyy-mm-dd");
+                        String stringDate = scanner.nextLine();
+                        if (!stringDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                            System.out.println("Неверный формат даты: ");
+                            throw new IllegalArgumentException("Неверный формат даты: " + stringDate);
+                        }
+                        LocalDate date = LocalDate.parse(stringDate);
                         expensesServices.addNewExpense(title, category, sumExpenses, date);
                         System.out.println("Расход успешно добавлен!");
                         break;
@@ -73,7 +76,7 @@ public class Main {
                             scanner.nextLine();
                             switch (command2) {
                                 case 1:
-                                    System.out.println("Введите название расхода:");
+                                    System.out.println("Введите название расхода, который хотите изменить:");
                                     String expenseTitle1 = scanner.nextLine();
                                     System.out.println("Введите новое название расхода:");
                                     String expenseNewTitle = scanner.nextLine();
@@ -105,6 +108,12 @@ public class Main {
                                     System.out.println("Введите название расхода, который хотите изменить:");
                                     String expenseTitle4 = scanner.nextLine();
                                     System.out.println("Введите новую дату расхода:");
+                                    String stringDateNew = scanner.nextLine();
+                                    if (!stringDateNew.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                                        System.out.println("Неверный формат даты: ");
+                                        throw new IllegalArgumentException("Неверный формат даты: " + stringDateNew);
+                                    }
+
                                     LocalDate newDate = LocalDate.parse(scanner.nextLine());
                                     expensesServices.changeExpenseDate(expenseTitle4, newDate);
                                     break;

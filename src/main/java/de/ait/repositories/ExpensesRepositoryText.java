@@ -99,7 +99,7 @@ public class ExpensesRepositoryText implements ExpensesRepository {
     public Expense findByTitle(String title) {
 
             try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-                List<Expense> expenses = new ArrayList<>();
+//                List<Expense> expenses = new ArrayList<>();
 
                 String line = reader.readLine();
                 while (line != null) {
@@ -114,7 +114,6 @@ public class ExpensesRepositoryText implements ExpensesRepository {
             }
             return null;
         }
-
 
     @Override
     public void removeExpense(String expenseToRemove) {

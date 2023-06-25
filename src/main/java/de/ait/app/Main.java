@@ -62,11 +62,54 @@ public class Main {
 
                     case 2:
                         System.out.println("2. Изменить расход");
-                        System.out.println("Введите название расхода:");
-                        String expenseTitle = scanner.nextLine();
-                        System.out.println("Введите новую сумму расхода:");
-                        double newAmount = Double.parseDouble(scanner.nextLine());
-                        expensesServices.updateExpense(expenseTitle, newAmount);
+                        System.out.println("Выберите поле для изменения:");
+                        System.out.println("1. Название расхода");
+                        System.out.println("2. Категория расхода");
+                        System.out.println("3. Сумма расхода");
+                        System.out.println("4. Дата расхода");
+                        int command2 = 0;
+                        if(scanner.hasNextInt()){
+                            command2 = scanner.nextInt();
+                            scanner.nextLine();
+                            switch (command2) {
+                                case 1:
+                                    System.out.println("Введите название расхода:");
+                                    String expenseTitle1 = scanner.nextLine();
+                                    System.out.println("Введите новое название расхода:");
+                                    String expenseNewTitle = scanner.nextLine();
+                                    expensesServices.changeExpenseTitle(expenseTitle1, expenseNewTitle);
+                                    break;
+                                case 2:
+                                    System.out.println("Введите название расхода:");
+                                    String expenseTitle2 = scanner.nextLine();
+                                    System.out.println("Выберите новую категорию расхода:");
+                                    int categoryIndex1 = 1;
+                                    for (Category categoryNew : Category.values()) {
+                                        System.out.println(categoryIndex1 + ". " + categoryNew);
+                                        categoryIndex1++;
+                                    }
+                                    int categoryChoice1 = scanner.nextInt();
+                                    Category categoryNew = Category.values()[categoryChoice1 - 1];
+
+                                    scanner.nextLine();
+                                    expensesServices.changeExpenseCategory(expenseTitle2, categoryNew);
+                                    break;
+                                case 3:
+                                    System.out.println("Введите название расхода, который хотите изменить:");
+                                    String expenseTitle3 = scanner.nextLine();
+                                    System.out.println("Введите новую сумму расхода:");
+                                    double newSumExpense =  Double.parseDouble(scanner.nextLine());
+                                    expensesServices.changeSumExpense(expenseTitle3, newSumExpense);
+                                    break;
+                                case 4:
+                                    System.out.println("Введите название расхода, который хотите изменить:");
+                                    String expenseTitle4 = scanner.nextLine();
+                                    System.out.println("Введите новую дату расхода:");
+                                    LocalDate newDate = LocalDate.parse(scanner.nextLine());
+                                    expensesServices.changeExpenseDate(expenseTitle4, newDate);
+                                    break;
+                            }
+                        }
                         break;
 
                     case 3:

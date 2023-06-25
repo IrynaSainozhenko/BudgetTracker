@@ -30,6 +30,16 @@ public class ExpenseListImpl implements ExpensesRepository{
     }
 
     @Override
+    public void changeExpense(Expense updatedExpense) {
+
+    }
+
+    @Override
+    public Expense findByTitle(String title) {
+        return null;
+    }
+
+    @Override
     public void removeExpense(String expenseToRemove) {
         for (int i = 0; i<expenses.size();i++){
             if (expenses.get(i).getTitle().equals(expenseToRemove)) {
@@ -38,14 +48,14 @@ public class ExpenseListImpl implements ExpensesRepository{
         }
     }
 
-    @Override
-    public void changeExpense(String expenseTitle, double newAmount) {
-        for (int i = 0; i<expenses.size();i++){
-            if (expenses.get(i).getTitle().equals(expenseTitle)) {
-                expenses.get(i).setSumExpenses(newAmount);
-            }
-        }
-    }
+//    @Override
+//    public void changeExpense(String expenseTitle, double newAmount) {
+//        for (int i = 0; i<expenses.size();i++){
+//            if (expenses.get(i).getTitle().equals(expenseTitle)) {
+//                expenses.get(i).setSumExpenses(newAmount);
+//            }
+//        }
+//    }
 
     @Override
     public void removeAllExpenses() {

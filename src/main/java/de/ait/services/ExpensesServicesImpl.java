@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 
 public class ExpensesServicesImpl implements ExpensesServices{
@@ -56,10 +56,57 @@ public class ExpensesServicesImpl implements ExpensesServices{
         Expense newExpense = new Expense(title, category, sumExpenses, date);
         expensesRepository.save(newExpense);
     }
+    @Override
+    public void changeExpenseTitle(String oldTitle, String newTitle) {
+        Expense expense = expensesRepository.findByTitle(oldTitle);
 
-    public void updateExpense(String expenseTitle, double newAmount){
-        expensesRepository.changeExpense(expenseTitle, newAmount);
+        if (expense == null) {
+            throw new IllegalArgumentException("Расход с таким именем не найден");
+        }
+
+        expense.setTitle(newTitle);
+        expensesRepository.changeExpense(expense);
     }
+
+    @Override
+    public void changeExpenseCategory(String title, Category category) {
+        Expense expense = expensesRepository.findByTitle(title);
+
+        if (expense == null) {
+            throw new IllegalArgumentException("Расход с таким именем не найден");
+        }
+
+        expense.setCategory(category);
+        expensesRepository.changeExpense(expense);
+    }
+
+    @Override
+    public void changeSumExpense(String title, double newSumExpense) {
+        Expense expense = expensesRepository.findByTitle(title);
+
+        if (expense == null) {
+            throw new IllegalArgumentException("Расход с таким именем не найден");
+        }
+
+        expense.setSumExpenses(newSumExpense);
+        expensesRepository.changeExpense(expense);
+    }
+
+    @Override
+    public void changeExpenseDate(String title, LocalDate date) {
+        Expense expense = expensesRepository.findByTitle(title);
+
+        if (expense == null) {
+            throw new IllegalArgumentException("Расход с таким именем не найден");
+        }
+
+        expense.setDate(date);
+        expensesRepository.changeExpense(expense);
+    }
+
+//    public void updateExpense(String expenseTitle, double newAmount){
+//        expensesRepository.changeExpense(expenseTitle, newAmount);
+//    }
 
     public void removeExpenses(String expenseToRemove){
         expensesRepository.removeExpense(expenseToRemove);

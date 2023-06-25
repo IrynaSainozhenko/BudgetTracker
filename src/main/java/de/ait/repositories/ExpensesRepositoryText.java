@@ -66,10 +66,55 @@ public class ExpensesRepositoryText implements ExpensesRepository {
 
         } catch (IOException e) {
             throw new IllegalStateException("Данные не могут быть сохранены");
+        }
+    }
 
+    @Override
+    public void changeExpense(Expense updatedExpense) {
+
+            List<Expense> expenses = getAllExpenses();
+
+            for (Expense oldExpense : expenses) {
+                if (oldExpense.getTitle().equals(updatedExpense.getTitle())){
+                    oldExpense.setTitle(updatedExpense.getTitle());
+                    oldExpense.setCategory(updatedExpense.getCategory());
+                    oldExpense.setSumExpenses(updatedExpense.getSumExpenses());
+                    oldExpense.setDate(updatedExpense.getDate());
+                }
+            }
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))){
+                for (Expense expense : expenses) {
+                    writer.write(expense.getTitle() + "|" +
+                            expense.getCategory() + "|" +
+                            expense.getSumExpenses() + "|" + expense.getDate());
+                    writer.newLine();
+                }
+            }catch (IOException e){
+                throw new IllegalStateException("Ошибка при работе с файлом - " + e.getMessage());
+            }
         }
 
-    }
+
+    @Override
+    public Expense findByTitle(String title) {
+
+            try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+                List<Expense> expenses = new ArrayList<>();
+
+                String line = reader.readLine();
+                while (line != null) {
+                    Expense expense = parseLine(line);
+                    if (expense.getTitle().equals(title)) {
+                        return expense;
+                    }
+                    line = reader.readLine();
+                }
+            } catch (IOException | ParseException e) {
+                throw new IllegalStateException("Ошибка при работе с файлом - " + e.getMessage());
+            }
+            return null;
+        }
+
 
     @Override
     public void removeExpense(String expenseToRemove) {
@@ -105,40 +150,40 @@ public class ExpensesRepositoryText implements ExpensesRepository {
             System.out.println("Произошла ошибка работы с файлом");
         }
     }
-    @Override
-    public void changeExpense(String expenseTitle, double newAmount) {
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(fileName));
-            List<Expense> expenses = new ArrayList<>();
-            String line = reader.readLine();
-            while ((line != null)) {
-                Expense expense = parseLine(line);
-                expenses.add(expense);
-                line = reader.readLine();
-            }
-            for (int i = 0; i<expenses.size();i++){
-                if (expenses.get(i).getTitle().equals(expenseTitle)) {
-                    expenses.get(i).setSumExpenses(newAmount);
-                }
-            }
-            reader.close();
-            try {
-                BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
-                for (Expense expense:expenses){
-                    writer.write(expense.getTitle() + "|" +
-                            expense.getCategory() + "|" +
-                            expense.getSumExpenses() + "|" + expense.getDate());
-                    writer.newLine();
-                }
-                writer.close();
-            }catch (Exception e){
-                System.err.println("Ошибка записи файла");
-            }
-            System.out.println("Cумма расхода успешно изменена");
-        } catch (Exception e) {
-            System.out.println("Произошла ошибка работы с файлом");
-        }
-    }
+//    @Override
+//    public void changeExpense(String expenseTitle, double newAmount) {
+//        try {
+//            BufferedReader reader = new BufferedReader(new FileReader(fileName));
+//            List<Expense> expenses = new ArrayList<>();
+//            String line = reader.readLine();
+//            while ((line != null)) {
+//                Expense expense = parseLine(line);
+//                expenses.add(expense);
+//                line = reader.readLine();
+//            }
+//            for (int i = 0; i<expenses.size();i++){
+//                if (expenses.get(i).getTitle().equals(expenseTitle)) {
+//                    expenses.get(i).setSumExpenses(newAmount);
+//                }
+//            }
+//            reader.close();
+//            try {
+//                BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+//                for (Expense expense:expenses){
+//                    writer.write(expense.getTitle() + "|" +
+//                            expense.getCategory() + "|" +
+//                            expense.getSumExpenses() + "|" + expense.getDate());
+//                    writer.newLine();
+//                }
+//                writer.close();
+//            }catch (Exception e){
+//                System.err.println("Ошибка записи файла");
+//            }
+//            System.out.println("Cумма расхода успешно изменена");
+//        } catch (Exception e) {
+//            System.out.println("Произошла ошибка работы с файлом");
+//        }
+//    }
 
     @Override
     public void removeAllExpenses() {

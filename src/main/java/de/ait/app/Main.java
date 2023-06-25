@@ -108,7 +108,6 @@ public class Main {
                                         System.out.println("Неверный формат даты: ");
                                         throw new IllegalArgumentException("Неверный формат даты: " + stringDateNew);
                                     }
-
                                     LocalDate newDate = LocalDate.parse(scanner.nextLine());
                                     expensesServices.changeExpenseDate(expenseTitle3, newDate);
                                     System.out.println("Данные успешно изменены!");

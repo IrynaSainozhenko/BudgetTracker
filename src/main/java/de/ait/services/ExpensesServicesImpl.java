@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-
 import java.util.List;
 
 public class ExpensesServicesImpl implements ExpensesServices{
@@ -25,11 +24,6 @@ public class ExpensesServicesImpl implements ExpensesServices{
        List<Expense> newExpense = new ArrayList<>();
        for(int i = 0; i < expensesRepository.getAllExpenses().size(); i++){
            LocalDate date = LocalDate.now().minusDays(7);
-           /*int tmpDate = date.compareTo(expensesRepository.getAllExpenses().get(i).getDate());
-           if(tmpDate <= 7 && tmpDate >= 0){
-               System.out.println(tmpDate);
-               newExpense.add(expensesRepository.getAllExpenses().get(i));
-           }*/
 
            if(expensesRepository.getAllExpenses().get(i).getDate().isAfter(date)
            || expensesRepository.getAllExpenses().get(i).getDate().equals(date)){

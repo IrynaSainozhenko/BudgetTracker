@@ -72,7 +72,6 @@ public class ExpensesRepositoryText implements ExpensesRepository {
 
             for (Expense oldExpense : expenses) {
                 if (oldExpense.getTitle().equals(updatedExpense.getTitle())){
-//                    oldExpense.setTitle(updatedExpense.getTitle());
                     oldExpense.setCategory(updatedExpense.getCategory());
                     oldExpense.setSumExpenses(updatedExpense.getSumExpenses());
                     oldExpense.setDate(updatedExpense.getDate());

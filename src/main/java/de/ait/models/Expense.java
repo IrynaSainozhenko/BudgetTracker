@@ -57,8 +57,5 @@ public class Expense {
         this.sumExpenses = sumExpenses;
         this.date = date;
     }
-
-    public void setAmount(double newAmount) {
-    }
 }
 

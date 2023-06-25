@@ -43,6 +43,10 @@ class ExpensesServicesImplTest {
     }
 
     @org.junit.jupiter.api.Test
-    void getExpensesTheCurrentMonth() {
+    void getExpensesTheCurrentMonth() throws IOException, ParseException {
+        List<Expense> actual = expensesServicesImpl.getExpensesTheCurrentMonth();
+        List<Expense> expected = List.of(new Expense("Кепка", Category.CLOTHES,15, LocalDate.of(2023,6,25))
+        );
+        assertEquals(expected, actual);
     }
 }

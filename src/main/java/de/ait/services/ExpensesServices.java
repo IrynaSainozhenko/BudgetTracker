@@ -11,6 +11,8 @@ import java.util.List;
 
 public interface ExpensesServices {
     List<Expense> getAll() throws IOException, ParseException;
+    public List<Expense> getExpensesSevenDays() throws IOException, ParseException;
+    public List<Expense> getExpensesTheCurrentMonth() throws IOException, ParseException;
     void addNewExpense(String title, Category category, double sumExpenses, LocalDate date);
 
     void updateExpense(String expenseTitle, double newAmount);

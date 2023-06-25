@@ -27,7 +27,7 @@ public class Main {
             System.out.println("1. Добавить расход");
             System.out.println("2. Изменить расход");
             System.out.println("3. Удалить расход");
-            System.out.println("4. Вывести все расходы");
+            System.out.println("4. Вывести расходы");
             System.out.println("0. Выход");
 
             int command = 0;
@@ -92,9 +92,30 @@ public class Main {
                         break;
 
                     case 4:
-                        System.out.println("Все расходы за весь период: ");
-                        List<Expense> expenses = expensesServices.getAll();
-                        printExpensesList(expenses);
+                        System.out.println("1. Вывести расходы за весь период\n" +
+                                        "2. Вывести расходы за последние 7 дней\n" +
+                                        "3. Вывести расходы за текущий месяц");
+                        if(scanner.hasNextInt()){
+                            List<Expense> expenses = null;
+                            switch (scanner.nextInt()){
+                                case 1:
+                                    System.out.println("Все расходы за весь период: ");
+                                    expenses = expensesServices.getAll();
+                                    printExpensesList(expenses);
+                                    break;
+                                case 2:
+                                    System.out.println("Расходы за последние 7 дней: ");
+                                    expenses = expensesServices.getExpensesSevenDays();
+                                    printExpensesList(expenses);
+                                    break;
+                                case 3:
+                                    System.out.println("Расходы за текущий месяц: ");
+                                    expenses = expensesServices.getExpensesTheCurrentMonth();
+                                    printExpensesList(expenses);
+                                    break;
+                            }
+                        }
+
                         break;
 
 

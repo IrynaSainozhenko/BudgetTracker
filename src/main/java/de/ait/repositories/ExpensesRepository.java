@@ -7,7 +7,8 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
 
-public interface ExpensesRepository {
+public interface
+ExpensesRepository {
     List<Expense> getAllExpenses() throws IOException, ParseException;
     void save(Expense expense);
     void changeExpense(Expense updatedExpense);

@@ -49,15 +49,6 @@ public class ExpenseListImpl implements ExpensesRepository{
         }
     }
 
-//    @Override
-//    public void changeExpense(String expenseTitle, double newAmount) {
-//        for (int i = 0; i<expenses.size();i++){
-//            if (expenses.get(i).getTitle().equals(expenseTitle)) {
-//                expenses.get(i).setSumExpenses(newAmount);
-//            }
-//        }
-//    }
-
     @Override
     public void removeAllExpenses() {
         expenses.removeAll(expenses);

@@ -13,10 +13,6 @@ ExpensesRepository {
     void save(Expense expense);
     void changeExpense(Expense updatedExpense);
     Expense findByTitle(String title);
-
     void removeExpense(String expenseToRemove);
-
-//    void changeExpense(String expenseTitle, double newAmount);
-
     void removeAllExpenses();
 }

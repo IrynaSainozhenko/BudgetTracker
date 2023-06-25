@@ -16,12 +16,11 @@ import java.util.Date;
 import java.util.List;
 
 public class ExpensesRepositoryText implements ExpensesRepository {
-    private String fileName;
+    private final String fileName;
 
     public ExpensesRepositoryText(String fileName) {
         this.fileName = fileName;
     }
-
     @Override
     public List<Expense> getAllExpenses() {
         List<Expense> expenses = new ArrayList<>();
@@ -40,7 +39,6 @@ public class ExpensesRepositoryText implements ExpensesRepository {
         }
         return expenses;
     }
-
     private static Expense parseLine(String line) throws ParseException {
         String[] parsed = line.split("\\|");
         String title = parsed[0];
@@ -50,8 +48,6 @@ public class ExpensesRepositoryText implements ExpensesRepository {
 
         return new Expense(title, category, sumExpenses, date);
     }
-
-
     @Override
     public void save(Expense expense) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(
@@ -76,7 +72,7 @@ public class ExpensesRepositoryText implements ExpensesRepository {
 
             for (Expense oldExpense : expenses) {
                 if (oldExpense.getTitle().equals(updatedExpense.getTitle())){
-                    oldExpense.setTitle(updatedExpense.getTitle());
+//                    oldExpense.setTitle(updatedExpense.getTitle());
                     oldExpense.setCategory(updatedExpense.getCategory());
                     oldExpense.setSumExpenses(updatedExpense.getSumExpenses());
                     oldExpense.setDate(updatedExpense.getDate());
@@ -99,7 +95,6 @@ public class ExpensesRepositoryText implements ExpensesRepository {
     public Expense findByTitle(String title) {
 
             try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-//                List<Expense> expenses = new ArrayList<>();
 
                 String line = reader.readLine();
                 while (line != null) {
@@ -149,40 +144,6 @@ public class ExpensesRepositoryText implements ExpensesRepository {
             System.out.println("Произошла ошибка работы с файлом");
         }
     }
-//    @Override
-//    public void changeExpense(String expenseTitle, double newAmount) {
-//        try {
-//            BufferedReader reader = new BufferedReader(new FileReader(fileName));
-//            List<Expense> expenses = new ArrayList<>();
-//            String line = reader.readLine();
-//            while ((line != null)) {
-//                Expense expense = parseLine(line);
-//                expenses.add(expense);
-//                line = reader.readLine();
-//            }
-//            for (int i = 0; i<expenses.size();i++){
-//                if (expenses.get(i).getTitle().equals(expenseTitle)) {
-//                    expenses.get(i).setSumExpenses(newAmount);
-//                }
-//            }
-//            reader.close();
-//            try {
-//                BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
-//                for (Expense expense:expenses){
-//                    writer.write(expense.getTitle() + "|" +
-//                            expense.getCategory() + "|" +
-//                            expense.getSumExpenses() + "|" + expense.getDate());
-//                    writer.newLine();
-//                }
-//                writer.close();
-//            }catch (Exception e){
-//                System.err.println("Ошибка записи файла");
-//            }
-//            System.out.println("Cумма расхода успешно изменена");
-//        } catch (Exception e) {
-//            System.out.println("Произошла ошибка работы с файлом");
-//        }
-//    }
 
     @Override
     public void removeAllExpenses() {

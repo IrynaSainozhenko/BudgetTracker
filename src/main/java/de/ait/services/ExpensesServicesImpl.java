@@ -50,22 +50,10 @@ public class ExpensesServicesImpl implements ExpensesServices{
         return newExpense;
     }
 
-
     @Override
     public void addNewExpense(String title, Category category, double sumExpenses, LocalDate date) {
         Expense newExpense = new Expense(title, category, sumExpenses, date);
         expensesRepository.save(newExpense);
-    }
-    @Override
-    public void changeExpenseTitle(String oldTitle, String newTitle) {
-        Expense expense = expensesRepository.findByTitle(oldTitle);
-
-        if (expense == null) {
-            throw new IllegalArgumentException("Расход с таким именем не найден");
-        }
-        System.out.println(newTitle);
-        expense.setTitle(newTitle);
-        expensesRepository.changeExpense(expense);
     }
 
     @Override
@@ -103,10 +91,6 @@ public class ExpensesServicesImpl implements ExpensesServices{
         expense.setDate(date);
         expensesRepository.changeExpense(expense);
     }
-
-//    public void updateExpense(String expenseTitle, double newAmount){
-//        expensesRepository.changeExpense(expenseTitle, newAmount);
-//    }
 
     public void removeExpenses(String expenseToRemove){
         expensesRepository.removeExpense(expenseToRemove);
